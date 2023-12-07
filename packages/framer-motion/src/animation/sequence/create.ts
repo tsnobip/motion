@@ -57,7 +57,7 @@ export function createAnimationsFromSequence(
         if (typeof segment === "string") {
             timeLabels.set(segment, currentTime)
             continue
-        } else if (!Array.isArray(segment)) {
+        } else if (!Array.isArray(segment) && (typeof segment !== 'function')) {
             timeLabels.set(
                 segment.name,
                 calcNextTime(currentTime, segment.at, prevTime, timeLabels)
@@ -65,7 +65,7 @@ export function createAnimationsFromSequence(
             continue
         }
 
-        let [subject, keyframes, transition = {}] = segment
+        let [subject, keyframes, transition = {}] = (typeof segment === 'function') ? segment() : segment
 
         /**
          * If a relative or absolute time value has been specified we need to resolve

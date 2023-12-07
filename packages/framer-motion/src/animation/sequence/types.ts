@@ -53,6 +53,10 @@ export type Segment =
     | DOMSegmentWithTransition
     | SequenceLabel
     | SequenceLabelWithTime
+    | (() => MotionValueSegment)
+    | (() => MotionValueSegmentWithTransition)
+    | (() => DOMSegment)
+    | (() => DOMSegmentWithTransition)
 
 export type AnimationSequence = Segment[]
 
